@@ -181,7 +181,10 @@
 
 		> svn import Setup.msi svn://tain.iptime.org:13690/REPO_ZIP/PROG/Setup.msi -m "." --force-log  --username admin --password admin123
 		
-
+		> svn import KANG.zip svn://joo.won.jang/REPO_ZIP/JOO_ZIPS/KANG.zip -m "create" --username admin --password admin123
+		
+		
+		
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
