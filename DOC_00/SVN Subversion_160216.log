@@ -782,6 +782,9 @@ svn import KANG01 svn://tain.iptime.org:13690/REPO_01/tags/0.1/KANG01 -m "a" --u
     위와 같이 하면 서비스가 제거된다.
 
 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
 [create service] sc \\TAINSERVER10 create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690" DisplayName= "Subversion svnserve"
 
 sc create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690" DisplayName= "Subversion svnserve"
@@ -802,8 +805,32 @@ sc create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe 
 
 sc delete svnserve
 
+서비스 상태 를 변경 하는 명령어
+중지 :  sc stop [서비스이름]
+시작 유형 을 변경 하는 명령어
+사용 안함 : sc config [서비스이름] start= disabled
+수동 : sc config [서비스이름] start= demend
+자동 : sc config [서비스이름] start= auto
+ 옵션 -> start= {boot|system|auto|demend|disabled}
+ boot : 디바이스 드라이버, 부트 로더에 의해 로드
+ system : 디바이스 드라이버, 커널 초기화 동안 실행
+ auto : 서비스, 컴퓨터 재시작마다 자동적으로 시작
+ demend : 서비스, 수동적으로 실행 - start 가 없으면 기본값
+ disabled : 서비스, 시작될 수 없고, 시작하려면 다른 값으로 한다
+
+아래 문서를 읽기전 주의 해주세요. - 시스템을 해칠 수 있음 -
+제거 : sc delete [서비스이름]
+추가 : sc create [서비스이름] type= own start= disabled error= normal binPath= no DisplayName= [표시 이름]
+설명 : sc description [서비스이름]
+ 옵션 -> type= {own|share|kernel|filesys|rec|adapt|interact type= {own|share}}
+ 옵션 -> error= {normal|severe|critical|ignore}
 
 
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 
 
