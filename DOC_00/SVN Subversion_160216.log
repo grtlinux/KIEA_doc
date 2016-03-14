@@ -782,6 +782,32 @@ svn import KANG01 svn://tain.iptime.org:13690/REPO_01/tags/0.1/KANG01 -m "a" --u
     위와 같이 하면 서비스가 제거된다.
 
 
+[create service] sc \\TAINSERVER10 create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690" DisplayName= "Subversion svnserve"
+
+sc create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690" DisplayName= "Subversion svnserve"
+
+[delete service] sc \\TAINSERVER10 delete svnserve
+
+sc delete svnserve
+
+
+
+[create service] sc \\TAINSERVER10 create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe" DisplayName= "Subversion svnserve"
+
+ --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690
+
+sc create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r C:\_KANG_SVN\REPOS_20160216 --listern-port 13690" DisplayName= "Subversion svnserve"
+
+[delete service] sc \\TAINSERVER10 delete svnserve
+
+sc delete svnserve
+
+
+
+
+
+
+
 [ 기본 에디터 지정하기 ]
 
     먼저 Subversion의 svn.exe를 사용하기 위해서는 기본 에디터를 지정해주어야 합니다. 기본 에디터는
