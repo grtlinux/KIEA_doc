@@ -154,7 +154,7 @@
 
 8. PC로 export 한 소스를 다른 SVN Repository로 import 한다.
 
-		> svn import SASEMARTCMS svn://localhost:3690/kang -m "svn import log" --username admin --password admin123
+		> svn import SASEMARTCMS svn://localhost:3690/REPO01/SASEMARTCMS -m "svn import log" --username admin --password admin123
 
 		> svn list svn://localhost:3690/kang
 
