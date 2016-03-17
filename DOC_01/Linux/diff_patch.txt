@@ -1,0 +1,524 @@
+[Linux] diff, patch 사용법
+
+
+patch (diff ) 파일 만들고, 적용시키기   
+
+1. 패치파일 만들기 (diff 이용) 
+
+
+
+- diff 의 쓰임 : 두 대상간의 차이점만을 모아 파일로 저장한다. 
+
+
+
+- 확장자 : .diff or .patch 
+
+
+
+- 만들기 전에는 make clean, make distclean, make mrproper 등을 수행하여, 
+
+
+
+컴파일된 파일을 모두 삭제한 뒤 만듭니다. 
+
+
+
+- 아래 설명들은 pwd 를 항상 생각하면서 도움이 됩니다. 
+
+
+
+
+
+
+
+* 실제 소스 코드를 통한 테스트를 합시다. 
+
+
+
+- 대상 : wu-ftpd-2.6.2.tar.gz 
+
+
+
+# cd /usr/src/ 
+
+
+
+# tar xzvf wu-ftpd-2.6.2.tar.gz : 압축 해제 
+
+
+
+# mv wu-ftpd-2.6.2 wu-ftpd-2.6.2-orig : 원본 백업 
+
+
+
+# tar xzvf wu-ftpd-2.6.2.tar.gz : 압축 해제 2 
+
+
+
+
+
+
+
+* 수정을 해 봐야죠? 
+
+
+
+# cd /usr/src/wu-ftpd-2.6.2 
+
+
+
+# vi src/ftpd.c 
+
+
+
+--------- 수정 전 ---------- 
+
+
+
+int main(int argc, char **argv, char **envp) 
+
+{ 
+
+#if defined(UNIXWARE) || defined(AIX) 
+
+size_t addrlen; 
+
+#else 
+
+int addrlen; 
+
+#endif 
+
+
+
+...... ( 중략 ) ........ 
+
+
+
+} 
+
+
+
+
+
+--------- 수정 후 ---------- 
+
+
+
+#if defined(UNIXWARE) || defined(AIX) 
+
+size_t addrlen; 
+
+int myaddr; <================ 한 줄 추가. 
+
+#else 
+
+
+
+
+
+
+
+
+
+# vi src/sco.c 
+
+
+
+--------- 수정 전 ---------- 
+
+
+
+char * 
+
+getcwd(pt, size) 
+
+char *pt; 
+
+int size; 
+
+{ 
+
+register struct dirent *dp; 
+
+...... ( 중략 ) ........ 
+
+} 
+
+
+
+
+
+--------- 수정 후 ---------- 
+
+
+
+char * getcwd(char *pt, int size) <======== 한 줄로 압축. 
+
+{ 
+
+register struct dirent *dp; 
+
+...... ( 중략 ) ........ 
+
+} 
+
+
+
+
+
+
+
+--------- 패치 파일 만들기 ---------- 
+
+
+
+# cd /usr/src/ 
+
+# ls 
+
+wu-ftpd-2.6.2 
+
+wu-ftpd-2.6.2-orig 
+
+
+
+
+
+# diff -urN wu-ftpd-2.6.2-orig wu-ftp-2.6.2 > wu-ftp-2.6.2-test.diff 
+
+diff [옵션] <원본 파일> <수정본> 
+
+
+
+-u : --unidirectional-new-file 
+
+통일된 출력 형식을 사용. 
+
+(디렉토리 비교시, 두 디렉토리중 
+
+두번째 디렉토리에만 파일이 존재한다면, 
+
+첫번째 디렉토리에는 파일이 없어도 있는 것처럼 처리한다) 
+
+-r : --recursive, 재귀적. 하위 디렉토리를 모두 검색한다. 
+
+-N : --new-file 
+
+(비교하는 디렉토리에 파일이 하나의 디렉토리에만 
+
+모두 있는 것처럼 처리하지만 사실 다른 한 디렉토리에는 
+
+파일이 없다. 새로 만든다.) 
+
+
+
+
+
+# vi wu-ftpd-2.6.2-test.diff 
+
+diff -urN wu-ftpd-2.6.2-orig/src/ftpd.c wu-ftpd-2.6.2/src/ftpd.c 
+
+--- wu-ftpd-2.6.2-orig/src/ftpd.c Fri Nov 30 01:56:11 2001 
+
++++ wu-ftpd-2.6.2/src/ftpd.c Sun Jun 23 20:04:57 2002 
+
+@@ -567,7 +567,8 @@ 
+
+int main(int argc, char **argv, char **envp) 
+
+{ 
+
+#if defined(UNIXWARE) || defined(AIX) 
+
+- size_t addrlen; // 이 한 줄을 빼고, 
+
++ size_t addrlen // 아래 2 줄을 넣어라. 
+
++ int myaddr; // 
+
+#else 
+
+int addrlen; 
+
+#endif 
+
+diff -urN wu-ftpd-2.6.2-orig/support/sco.c wu-ftpd-2.6.2/support/sco.c 
+
+--- wu-ftpd-2.6.2-orig/support/sco.c Sun Jul 2 03:36:29 2000 
+
++++ wu-ftpd-2.6.2/support/sco.c Sun Jun 23 20:14:47 2002 
+
+@@ -429,10 +429,7 @@ 
+
+(dp->d_name[0] == '.' && (dp->d_name[1] == '\0' || \ 
+
+dp->d_name[1] == '.' && dp->d_name[2] == '\0')) 
+
+
+
+-char * // 아래 4줄을 빼고, 
+
+- getcwd(pt, size) // 
+
+- char *pt; // 
+
+- int size; // 
+
++char *getcwd(char *pt, int size) // 이 한 줄을 넣어라. 
+
+{ 
+
+register struct dirent *dp; 
+
+register DIR *dir; 
+
+
+
+----------------------------------------------------------------- 
+
+다른 설명은 필요 없으리라 봅니다. 
+
+
+
+--- 로 표시된 것은 원본 
+
++++ 로 표시된 것은 수정본 
+
+
+
+- 로 표시된 줄은 빼고, 
+
++ 로 표시된 줄로 대치한다. 
+
+
+
+
+
+**************************************************************** 
+
+
+
+diff 파일은 ASCII 형태의 파일이므로, 압축을 하면 
+
+상당히 그 양을 줄일 수 있습니다. 
+
+일반적으로 tar.gz 혹은 gz 을 사용하니 그대로 사용합니다. 
+
+
+
+# gzip wu-ftpd-2.6.2-test.diff 
+
+# ls 
+
+wu-ftpd-2.6.2-test.diff.gz 
+
+
+
+
+
+
+
+2. 패치파일 적용하기. 
+
+
+
+이제 패치 파일을 적용시켜 봅시다. 
+
+
+
+지금부터는 패치를 만드는 과정은 생각하지 않습니다. 
+
+
+
+즉 새롭게 소스를 다운 받은 상태라고 생각하고 진행하세요. 
+
+
+
+그렇다면 그 상황을 만들어 봅시다. 
+
+
+
+# cd /usr/src 
+
+
+
+# mv wu-ftpd-2.6.2 wu-ftpd-2.6.2-old 
+
+
+
+# mv wu-ftpd-2.6.2-orig wu-ftpd-2.6.2 
+
+혹은 
+
+# rm -rf wu-ftpd-2.6.2-orig ; tar xzvf wu-ftpd-2.6.2.tar.gz 
+
+
+
+이제 상황이 설정되었죠? 
+
+
+
+그럼 이제 패치할 파일의 정보를 확인해 봅시다. 
+
+
+
+# zcat wu-ftpd-2.6.2-test.diff.gz | head -3 
+
+-------------------------------------------------------------------- 
+
+diff -urN wu-ftpd-2.6.2-orig/src/ftpd.c wu-ftpd-2.6.2/src/ftpd.c <=== 주목 
+
+--- wu-ftpd-2.6.2-orig/src/ftpd.c Fri Nov 30 01:56:11 2001 
+
++++ wu-ftpd-2.6.2/src/ftpd.c Sun Jun 23 20:04:57 2002 
+
+-------------------------------------------------------------------- 
+
+
+
+첫줄을 보시면 patch 를 만들었을 때 정보를 확인할 수 있죠. 
+
+즉 어떻게 패치를 적용해야 할 지도 알수도 있는 셈이죠. 
+
+diff [옵션] <원본> <수정본> 
+
+눈여겨 봐야 할 곳은 <원본>과 <수정본> 디렉토리의 차이점이죠. 
+
+적용시킬 때는 <수정본>을 주목합니다. 
+
+
+
+
+
+확인이 끝났으면 원본이 있는 곳으로 갑니다. 
+
+
+
+# cd wu-ftpd-2.6.2 
+
+
+
+patch 를 실행시킬 때는 diff 파일의 내용과, 현재 커서가 있는 디렉토리와의 
+
+관계를 잘 따져야 합니다. 
+
+
+
+지금 있는 곳의 디렉토리가 wu-ftpd-2.6.2/ 입니다. 
+
+여기서 ls src/ftpd.c 명령을 내린다면 그 파일이 있겠죠? 
+
+
+
+위의 파일에서 첫번째 줄을 다시 보면, <수정본> 이 wu-ftpd-2.6.2/src/ftpd.c 라고 
+
+되어 있습니다. 즉 현재 작업위치가 wu-ftpd-2.6.2/ 디렉토리이니, 이 부분은 건너 
+
+띌 수 있는 겁니다. 
+
+
+
+그래서 여기서 패치 명령을 내린다면, 
+
+
+
+# zcat ../wu-ftpd-2.6.2-test.diff.gz | patch -p1 
+
+
+
+-p1 에서 '1' 의 의미는 <수정본>에 관한 정보 " wu-ftpd-2.6.2/src/ftpd.c " 에서 
+
+'/' 하나(디렉토리 하나)를 건너띄고 비교해서 패치를 적용시키라는 의미가 됩니
+
+다. 
+
+
+
+이제 감을 잡았나요? patch -p1 의 의미를... 
+
+
+
+
+
+하지만, wu-ftpd-2.6.2 디렉토리로 들어가지 않았았고, 패치 파일이 위와 같은 경
+
+우라면 
+
+-p0 을 사용하면 된다. 
+
+
+
+즉 <수정본> 정보에서 wu-ftpd-2.6.2/ 이고, 적용시킬 소스가 있는 디렉토리가 
+
+wu-ftpd-2.6.2/ 로 
+
+동일하기 때문이다. 
+
+
+
+
+
+-p1 을 먼저 예로 든 이유는 디렉토리명이 틀릴 경우가 많기 때문이다. 
+
+
+
+
+
+(참고) - patch 를 적용시키는데 있어서 여러 방법. 
+
+# zcat *****.diff.gz | patch -p1 
+
+# gzip -dc *****.diff.gz | patch -p1 
+
+
+
+# patch -p1 < *****.diff 
+
+# cat *****.diff | patch -p1 
+
+
+
+위의 두 경우는 압축되어 있는 것을 풀어서, 화면상에 표준출력되는 
+
+내용을 파이프를 통해 patch 프로세스에 diff 정보를 전달하는 경우이고, 
+
+
+
+아래 두 경우는 압축되지 않은 것을 redirection 과 파이프를 통해 
+
+patch 프로세스에 diff 정보를 전달하여 적용하는 방법입니다.
+
+
+
+참고 1 :
+
+-N 옵션은 원본에 없고 수정본에 새로운 
+
+파일이 있을 경우 이것도 diff의 출력에 
+
+포함시키라는 의미입니다. 즉 없던 
+
+파일이 생기면 파일 전체가 diff에 
+
+포함되겠죠. 
+
+
+
+-u는 unified diff 라는 포맷인데 
+
+요즘에는 -c (context diff)라는 
+
+포맷도 많이 씁니다. 모두 patch가 
+
+알아들을 수 있고, fuzzy 적용 
+
+(꼭 일치하지 않아도 대충 적용)이 
+
+가능합니다. 
+
+
+
+patch를 만든 사람은 perl을 만든 
+
+Larry Wall이라는 것도 기억해 두세요.
