@@ -1,0 +1,211 @@
+1. 네트워크 설정 
+[설명] 로컬에서 사용하는 DNS라고 생각하면 됩니다. IP주소를 hostname으로 매핑 시켜주는 역활을 합니다. 
+# cat /etc/hosts
+IP                [TAB]Domain Name[TAB]Server Name[TAB] syslog관련 다른 시스템에 로그기록
+192.168.174.5         calmmass.com             calmmass                   loghost
+
+[설명] /etc/hosts에서 설정한 calmmass.com(192.168.174.5) 호스트네임을 적어도 네트워크는 연결 되지만 가급적이면 자신의 IP를 적습니다.
+# cat /etc/hostname.pcn0
+calmmass or 192.168.147.5
+
+[설명] 호스트 네임 설정은 재부팅 후 계속 사용하려면 아래와 같이 적용해주시기 바랍니다.
+# vi /etc/nodename
+calmmass                            // /etc/hosts 설정한 2번째 server name을 적습니다.
+# hostname                          // 호스트 이름 확인 명령어
+calmmass
+
+[설명] 기본 라우터를 설정 합니다.
+[참고] 기본 라우터가 설정되어 있지 않을 경우에는 아래와 같은 명령어를 먼저 수행 하시기 바랍니다.
+ex) route add default 192.168.174.2
+[참고] 기본 라우터를 삭제 하고 싶을 경우 아래와 같은 명령어를 수행 하시기 바랍니다.
+ex) route flush
+[참고] 기본 라우터를 재부팅 후에서 계속 사용하고 싶을 경우 아래와 같이 라우터 IP를 등록 하세요.
+# cat  /etc/defaultrouter
+192.168.174.2
+
+[설명] KT DNS IP를 적어 줍니다.
+# cat /etc/resolv.conf
+domain calmmass.com           // 자신의 도메인 이름 
+nameserver 168.126.63.1         // KT DNS 주소
+
+[설명] NETWORK와 NETMASK를 설정하시면 됩니다.
+# cat /etc/netmasks
+192.168.174.0   255.255.255.0
+
+[설명] dns 추가( 있을 경우 그대로 남겨주시기 바랍니다.)
+# cat /etc/nsswitch.conf
+hosts:   files   dns(이부분 추가)
+
+[설명] IP 변경, 설정이 완료 디면 재부팅 해야 합니다.
+[참고] pcn0는 Intel Platform on VMware의 디바이스 이름
+# ifconfig -a                               //  Infomation a Network Interface
+# ifconfig pcn0 down                   //  shut down a network interface
+# ifconfig pcn0 unplumb               // Close the device
+# ifconfig pcn0 plumb                   // Open the device
+# ifconfig pcn0 192.168.174.5 up     // 참고사항.
+# ifconfig pcn0 192.168.174.5 netmask 255.255.255.0 broadcast + up        // start a network interface
+# reboot (init 6)                             // Rebooting
+
+
+[설정 완료 후 테스크 방법] Network 설정 확인 하여 정상적으로 작동하는지 확인 합니다.
+# netstat -rn                             // 기본 라우터에 대한 설정 정보를 확인
+# ifconfig -a                             // 인터페이스 정보 확인
+# ping www.google.co.kr          // Ping를 이용하여 외부로 접근 하는지 테스트
+# nslookup www.google.co.kr   // DNS 설정 확인(제대로 되지 않을 경우 /etc/resolv.conf 확인)
+# traceroute www.google.co.kr  // 현재 시스템에서 google 라우터까지 정보를 확인
+# arp -a                                   // 등록된 호스트 중에서 MAC 주소 확인
+# snoop [ip|host name]             // 네트워크 패킷 검사
+
+[ 출처 ] Part I Network Services Topics
+
+
+2. putty, xshell 등을 이용한 외부 접속 방법 
+[설명] 아래와 같이 ssh를 사용 할 경우 root는 접속을 제한 하게 됩니다. 기본값 no를 yes로 변경후 저장 합니다. 저장이 완료 되었을 경우에는 sshd 데몬을 재시작 합니다.
+# cat /etc/ssh/sshd_config 
+PermitRootLogin yes
+
+# /etc/init.d/sshd restart
+
+
+3. Solaris -> Linux 인척 하기.. 
+[설명] 현재 사용하고 있는 쉘을 확인 합니다.
+# echo $SHELL
+/usr/bin/bash
+
+[설명] /etc/passwd 파일에서 root 계정의 쉘을 변경 합니다.
+# grep '^root' /etc/passwd
+root:x:0:1:Super-User:/:/usr/bin/bash
+
+[설명] 로그인을 시작 하면 .bash_profile를 읽게 됩니다. 만약 .bashrc 파일이 있을 경우 환경설정을 반영합니다.
+[ 참고 사항 ] Solaris 운영 환경용 그놈 2.0 데스크탑 문제 해결 설명서
+# cat .bash_profile
+if [ -f ~/.bashrc ]; then
+       source ~/.bashrc
+fi
+
+export PATH=/usr/local/bin:/usr/sfw/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/ccs/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/ucblib:/usr/ccs/lib:/usr/sfw/lib:/usr/local/xml/lib
+
+[설명] 위에 설명과 같이 .bash_profile에서 source로 적용을 하게 됩니다.
+# cat .bashrc
+
+export PS1='\[\033[1;33m\][\u@\h:\w]\n\$\[\033[0m\] '
+export LANG=ko
+
+alias   cls=clear
+alias   cp='cp -i'
+alias   dir='ls -alF \!* | more'
+alias   rm='rm -i'
+alias   mv='mv -i'
+alias   l='ls -F'
+alias   ls='ls -F'
+alias   ll='ls -al'
+alias   psg='ps -ef | grep -v grep | grep '
+
+[설명] useradd 명령어로 유저를 생성 할때 아래와 같은 파일이 생성 되게 할려면 /etc/skel 파일에 넣어야 합니다.
+# cp .bash_profile /etc/skel/
+# cp .bashrc /etc/skel/
+
+
+
+4. vim, ls 명령어 색상 변경 
+[설명] vim을 설치 합니다.
+# wget ftp://ftp.sunfreeware.com/pub/freeware/intel/9/vim-7.3-sol9-x86-local.gz
+# gzip -d vim-7.3-sol9-x86-local.gz
+# pkgadd -d vim-7.3-sol9-x86-local
+
+[설명] coreutils를 다운 받습니다. 반드시 자신의 Solaris 버전을 확인 하고 오른쪽에서 체크 하시기 바랍니다.
+libiconv, libintl, gmp, libgcc-3.4.6 , gcc-3.4.6 반드시 먼저 설치 되어있어야 합니다..
+
+
+
+[설명] WinSCP를 이용해서 로컬 데이터를 서버로 전송 합니다.
+
+
+[설명] 전송 받은 패키지를 압축을 풀고 인스톨 합니다.
+[root@calmmass:/var/sadm/pkg]
+# cd /tmp
+[root@calmmass:/tmp]
+# ls
+coreutils-8.7-sol9-x86-local.gz   patchadd-6012446/
+[root@calmmass:/tmp]
+# gunzip coreutils-8.7-sol9-x86-local.gz
+[root@calmmass:/tmp]
+# ls
+coreutils-8.7-sol9-x86-local   patchadd-6012446/
+[root@calmmass:/tmp]
+# pkgadd -d coreutils-8.7-sol9-x86-local
+[root@calmmass:/tmp]
+# pkginfo |grep coreutils
+application SMCcoreu                         coreutils
+
+[설명] 정상적으로 수행 했다면 아래와 같이 디렉토리가 알록달록 나올 것입니다.
+
+
+
+[root@calmmass:/]
+# cp /usr/local/bin/* /usr/bin
+
+[root@calmmass:/]
+# cat .bashrc
+alias   ls='ls --color=auto'
+alias   ll='ls -al --color=auto'
+[root@calmmass:/]
+# source .bashrc
+
+[ 출저 ] 김재연 형이 찾아낸 ls -al 할 경우 디렉토리와 파일의 색상 확인 방법 
+[ 출처 ] http://www.mytv.kr/tc/426
+
+
+5. Xmanager(Xstart 사용) 
+[Error Message] 원격 ssh 서버가 X11 포워딩 요청을 거부하였습니다. X11 포워딩을 사용하려면 원격 서버의 설정을 변경해야 합니다.
+[설명] 위와 같은 에러 메시지는 X11 forwarding failed에러와 같으며 ssh의 환경설정을 변경 하여 접속 하도록 하겠습니다.
+[root@calmmass:/etc/ssh]
+# perl -ane 'printf"$_\n" if /(ListenAddress|X11)/' /etc/ssh/sshd_config
+# Multiple ListenAddress entries are allowed.
+#ListenAddress 0.0.0.0       // 주석 처리
+#ListenAddress ::             // 주석 처리
+# X11 tunneling options
+X11Forwarding yes           // yes로 변경
+X11DisplayOffset 10
+
+[설명] /etc/init.d/sshd 스크립트를 열어서 데몬 시작 하는 부분에 -4 옵션을 넣어 줍니다.
+[root@calmmass:/etc/ssh]
+# vi /etc/init.d/sshd
+[ -x /usr/lib/ssh/sshd ] && /usr/lib/ssh/sshd -4&
+
+[설명] sshd 데몬을 재시작 합니다.
+[root@calmmass:/etc/ssh]
+# /etc/init.d/sshd stop
+[root@calmmass:/etc/ssh]
+# /etc/init.d/sshd start
+
+[설명] sshd 프로세스를 확인 하면 아래와같이 나옵니다.
+[root@calmmass:/]
+# ps -ef |grep -v grep |grep sshd
+    root   620   619  1 19:50:04 ?        0:00 /usr/lib/ssh/sshd -4
+    root   619     1  0 19:49:56 ?        0:00 /usr/lib/ssh/sshd -4
+
+[설명] Xmanager에서 제공하는 Xstart를 수행 하도록 하겠습니다.
+
+
+
+
+
+
+[ 출처 ] http://spiralbound.net/2008/06/03/x11-forwarding-broken-on-solaris
+
+
+
+본 문서에서는 Oracle 설치를 하기 위해서 세팅해야 할 여러가지 설정방법과 툴을 기재 하였습니다.
+1. Solaris Network Setting
+2. SSH root 유저 접속제한 해제
+3. Linux(bash) Shell 사용하기
+4. 알면 유용한 툴(Vim, coreutils)
+5. Xstart 툴을 이용시에 문제가 되는 X11 포워딩 에러 해결 방법
+
+문제점은 로컬에서 NAT로 설정하고 파일을 옮기면 속도가 좀 느려진다는 것입니다.
+그문제는 아래 URL을 참조하시기 바랍니다.
+Setting network speed on solaris9
+
+마지막으로 Solaris10에서도 동일하게 지원하지 않을까 생각 합니다.(테스트 해보지 않음)
