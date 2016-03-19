@@ -56,9 +56,9 @@
 	set COM_NAME=\\%COMPUTERNAME%
 	echo COM_NAME=%COM_NAME%
 	:: create service
-	sc \\TAINSERVER10 create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r \"C:\[ KANG ]\SVN_REPOS\REPOS_20160216\" --listen-port 13690" DisplayName= "Subversion svnserve" start= auto
+	sc %COM_NAME% create svnserve binpath= "C:\Program Files (x86)\Subversion\bin\svnserve.exe --service -r \"C:\[ KANG ]\SVN_REPOS\REPOS_20160216\" --listen-port 13690" DisplayName= "Subversion svnserve" start= auto
 	:: make service description
-	sc \\TAINSERVER10 description svnserve "#### Description of Subversion..."
+	sc %COM_NAME% description svnserve "#### Description of Subversion..."
 	:: start service
 	net start svnserve
 	:: check starting service
@@ -68,7 +68,10 @@
 ----------------------------------------------------------------------------------------------------
 [ delete_service.cmd ]
 	@echo on
-	sc \\TAINSERVER10 delete svnserve
+	:: COM_NAME
+	set COM_NAME=\\%COMPUTERNAME%
+	echo COM_NAME=%COM_NAME%
+	sc %COM_NAME% delete svnserve
 	timeout 3
 
 ----------------------------------------------------------------------------------------------------
