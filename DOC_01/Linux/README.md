@@ -26,50 +26,50 @@ This is a description of subcomment.
 		# no more supported
 		MAIL_DIR        /var/mail
 		#MAIL_FILE      .mail
-		
+
 		#
 		# Enable logging and display of /var/log/faillog login failure info.
 		# This option conflicts with the pam_tally PAM module.
 		#
 		FAILLOG_ENAB		yes
-		
+
 		#
 		# Enable display of unknown usernames when login failures are recorded.
 		#
-		# WARNING: Unknown usernames may become world readable. 
+		# WARNING: Unknown usernames may become world readable.
 		# See #290803 and #298773 for details about how this could become a security
 		# concern
 		LOG_UNKFAIL_ENAB	no
-		
+
 		#
 		# Enable logging of successful logins
 		#
 		LOG_OK_LOGINS		no
-		
+
 		#
 		# Enable "syslog" logging of su activity - in addition to sulog file logging.
 		# SYSLOG_SG_ENAB does the same for newgrp and sg.
 		#
 		SYSLOG_SU_ENAB		yes
 		SYSLOG_SG_ENAB		yes
-		
+
 		#
 		# If defined, all su activity is logged to this file.
 		#
 		#SULOG_FILE	/var/log/sulog
-		
+
 		#
 		# If defined, file which maps tty line to TERM environment parameter.
 		# Each line of the file is in a format something like "vt100  tty01".
 		#
 		#TTYTYPE_FILE	/etc/ttytype
-		
+
 		#
 		# If defined, login failures will be logged here in a utmp format
 		# last, when invoked as lastb, will read /var/log/btmp, so...
 		#
 		FTMP_FILE	/var/log/btmp
-		
+
 		#
 		# If defined, the command name to display when running "su -".  For
 		# example, if this is defined as "su" then a "ps" will display the
@@ -77,7 +77,7 @@ This is a description of subcomment.
 		# name of the shell actually being run, e.g. something like "-sh".
 		#
 		SU_NAME		su
-		
+
 		#
 		# If defined, file which inhibits all the usual chatter during the login
 		# sequence.  If a full pathname, then hushed mode will be enabled if the
@@ -86,14 +86,14 @@ This is a description of subcomment.
 		#
 		HUSHLOGIN_FILE	.hushlogin
 		#HUSHLOGIN_FILE	/etc/hushlogins
-		
+
 		#
 		# *REQUIRED*  The default PATH settings, for superuser and normal users.
 		#
 		# (they are minimal, add the rest in the shell startup files)
 		ENV_SUPATH	PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 		ENV_PATH	PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
-		
+
 		#
 		# Terminal permissions
 		#
@@ -108,13 +108,13 @@ This is a description of subcomment.
 		# In Debian /usr/bin/bsd-write or similar programs are setgid tty
 		# However, the default and recommended value for TTYPERM is still 0600
 		# to not allow anyone to write to anyone else console or terminal
-		
-		# Users can still allow other people to write them by issuing 
+
+		# Users can still allow other people to write them by issuing
 		# the "mesg y" command.
-		
+
 		TTYGROUP	tty
 		TTYPERM		0600
-		
+
 		#
 		# Login configuration initializations:
 		#
@@ -123,7 +123,7 @@ This is a description of subcomment.
 		#	UMASK		Default "umask" value.
 		#
 		# The ERASECHAR and KILLCHAR are used only on System V machines.
-		# 
+		#
 		# UMASK usage is discouraged because it catches only some classes of user
 		# entries to system, in fact only those made through login(1), while setting
 		# umask in shell rc file will catch also logins through su, cron, ssh etc.
@@ -134,7 +134,7 @@ This is a description of subcomment.
 		#
 		# Therefore the use of pam_umask is recommended as the solution which
 		# catches all these cases on PAM-enabled systems.
-		# 
+		#
 		# This avoids the confusion created by having the umask set
 		# in two different places -- in login.defs and shell rc files (i.e.
 		# /etc/profile).
@@ -151,7 +151,7 @@ This is a description of subcomment.
 		# There is no One True Answer here : each sysadmin must make up his/her
 		# mind.
 		#UMASK		022
-		
+
 		#
 		# Password aging controls:
 		#
@@ -162,7 +162,7 @@ This is a description of subcomment.
 		PASS_MAX_DAYS	99999
 		PASS_MIN_DAYS	0
 		PASS_WARN_AGE	7
-		
+
 		#
 		# Min/max values for automatic uid selection in useradd
 		#
@@ -171,7 +171,7 @@ This is a description of subcomment.
 		# System accounts
 		#SYS_UID_MIN		  100
 		#SYS_UID_MAX		  999
-		
+
 		#
 		# Min/max values for automatic gid selection in groupadd
 		#
@@ -180,7 +180,7 @@ This is a description of subcomment.
 		# System accounts
 		#SYS_GID_MIN		  100
 		#SYS_GID_MAX		  999
-		
+
 		#
 		# Max number of login retries if password is bad. This will most likely be
 		# overriden by PAM, since the default pam_unix module has it's own built
@@ -188,33 +188,33 @@ This is a description of subcomment.
 		# an authentication module that does not enforce PAM_MAXTRIES.
 		#
 		LOGIN_RETRIES		5
-		
+
 		#
 		# Max time in seconds for login
 		#
 		LOGIN_TIMEOUT		60
-		
+
 		#
 		# Which fields may be changed by regular users using chfn - use
 		# any combination of letters "frwh" (full name, room number, work
 		# phone, home phone).  If not defined, no changes are allowed.
 		# For backward compatibility, "yes" = "rwh" and "no" = "frwh".
-		# 
+		#
 		CHFN_RESTRICT		rwh
-		
+
 		#
 		# Should login be allowed if we can't cd to the home directory?
 		# Default in no.
 		#
 		DEFAULT_HOME	yes
-		
+
 		#
 		# If defined, this command is run when removing a user.
 		# It should remove any at/cron/print jobs etc. owned by
 		# the user to be removed (passed as the first argument).
 		#
 		#USERDEL_CMD	/usr/sbin/userdel_local
-		
+
 		#
 		# This enables userdel to remove user groups if no members exist.
 		#
@@ -223,7 +223,7 @@ This is a description of subcomment.
 		#
 		USERGROUPS_ENAB yes
 		.....
-				
+
 		#
 		# If defined, either full pathname of a file containing device names or
 		# a ":" delimited list of device names.  Root logins will be allowed only
@@ -233,7 +233,7 @@ This is a description of subcomment.
 		#
 		#CONSOLE	/etc/consoles
 		#CONSOLE	console:tty01:tty02:tty03:tty04
-		
+
 		#
 		# List of groups to add to the user's supplementary group set
 		# when logging in on the console (as determined by the CONSOLE
@@ -246,7 +246,7 @@ This is a description of subcomment.
 		# This variable is used by login and su.
 		#
 		#CONSOLE_GROUPS		floppy:audio:cdrom
-		
+
 		#
 		# If set to "yes", new passwords will be encrypted using the MD5-based
 		# algorithm compatible with the one used by recent releases of FreeBSD.
@@ -257,7 +257,7 @@ This is a description of subcomment.
 		# This variable is deprecated. You should use ENCRYPT_METHOD.
 		#
 		#MD5_CRYPT_ENAB	no
-		
+
 		#
 		# If set to MD5 , MD5-based algorithm will be used for encrypting password
 		# If set to SHA256, SHA256-based algorithm will be used for encrypting password
@@ -269,7 +269,7 @@ This is a description of subcomment.
 		# the PAM modules configuration.
 		#
 		ENCRYPT_METHOD SHA512
-		
+
 		.....
 
 	$ cat /etc/default/useradd
@@ -295,7 +295,7 @@ This is a description of subcomment.
 		# The default home directory. Same as DHOME for adduser
 		# HOME=/home
 		#
-		# The number of days after a password expires until the account 
+		# The number of days after a password expires until the account
 		# is permanently disabled
 		# INACTIVE=-1
 		#
@@ -310,8 +310,142 @@ This is a description of subcomment.
 		# Defines whether the mail spool should be created while
 		# creating the account
 		# CREATE_MAIL_SPOOL=yes
-		
 		.....
+
+	$ cat /root/.profile
+
+		# ~/.profile: executed by Bourne-compatible login shells.
+
+		if [ `hostname` == "bt5-forensics" ]; then
+			echo ""
+		        echo "[*] Disabling Automount for Forensics Mode"
+		        /usr/bin/gconftool-2 --set /apps/nautilus/preferences/media_automount --type bool false 2> /dev/null
+		       echo "[*] UDEV mounts in Read Only mode"
+		       cp /opt/files/99-fstab.rules /etc/udev/rules.d/
+		       /usr/sbin/rebuildfstab
+		fi
+
+		if [ `hostname` == "bt5-stealth" ]; then
+		        echo ""
+		        echo "[*] BackTrack Stealth Mode, Networking Disabled"
+		fi
+
+
+		if [ "$BASH" ]; then
+		  if [ -f ~/.bashrc ]; then
+		    . ~/.bashrc
+		  fi
+		fi
+
+		mesg n
+
+	$ cat /root/.bashrc
+
+		# ~/.bashrc: executed by bash(1) for non-login shells.
+		# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+		# for examples
+
+		# If not running interactively, don't do anything
+		if [[ -n "$PS1" ]]; then
+
+		# don't put duplicate lines in the history. See bash(1) for more options
+		# ... or force ignoredups and ignorespace
+		HISTCONTROL=ignoredups:ignorespace
+
+		# append to the history file, don't overwrite it
+		shopt -s histappend
+
+		# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+		HISTSIZE=1000
+		HISTFILESIZE=2000
+
+		# check the window size after each command and, if necessary,
+		# update the values of LINES and COLUMNS.
+		shopt -s checkwinsize
+
+		# make less more friendly for non-text input files, see lesspipe(1)
+		[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+		# set variable identifying the chroot you work in (used in the prompt below)
+		if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+		    debian_chroot=$(cat /etc/debian_chroot)
+		fi
+
+		# set a fancy prompt (non-color, unless we know we "want" color)
+		case "$TERM" in
+		    xterm-color) color_prompt=yes;;
+		esac
+
+		# uncomment for a colored prompt, if the terminal has the capability; turned
+		# off by default to not distract the user: the focus in a terminal window
+		# should be on the output of commands, not on the prompt
+		force_color_prompt=yes
+
+		if [ -n "$force_color_prompt" ]; then
+		    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+			# We have color support; assume it's compliant with Ecma-48
+			# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+			# a case would tend to support setf rather than setaf.)
+			color_prompt=yes
+		    else
+			color_prompt=
+		    fi
+		fi
+
+		if [ "$color_prompt" = yes ]; then
+		    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+		else
+		    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+		fi
+		unset color_prompt force_color_prompt
+
+		# If this is an xterm set the title to user@host:dir
+		case "$TERM" in
+		xterm*|rxvt*)
+		    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+		    ;;
+		*)
+		    ;;
+		esac
+
+		# enable color support of ls and also add handy aliases
+		if [ -x /usr/bin/dircolors ]; then
+		    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+		    alias ls='ls --color=auto'
+		    #alias dir='dir --color=auto'
+		    #alias vdir='vdir --color=auto'
+
+		    alias grep='grep --color=auto'
+		    alias fgrep='fgrep --color=auto'
+		    alias egrep='egrep --color=auto'
+		fi
+
+		# some more ls aliases
+		alias ll='ls -alF'
+		alias la='ls -A'
+		alias l='ls -CF'
+
+		# Alias definitions.
+		# You may want to put all your additions into a separate file like
+		# ~/.bash_aliases, instead of adding them here directly.
+		# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+		if [ -f ~/.bash_aliases ]; then
+		    . ~/.bash_aliases
+		fi
+
+		# enable programmable completion features (you don't need to enable
+		# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+		# sources /etc/bash.bashrc).
+		#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+		#    . /etc/bash_completion
+		#fi
+		  export HISTCONTROL=ignoreboth
+		fi
+
+		export PATH=$PATH:/etc/alternatives/gem-bin
+
+	$
 
 You have a choice of the below.
 
