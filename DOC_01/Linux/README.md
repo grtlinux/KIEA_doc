@@ -2,20 +2,28 @@
 -----------------------------------------
 This is a description of subcomment.
 
+ * /etc/group
+
 	$ cat /etc/group
 		.....
 		users:x:100:kang
 		.....
+
+ * /etc/passwd
 
 	$ cat /etc/passwd
 		.....
 		kang:x:1001:100:Desc Kiea Kang:/home/kang:/bin/bash
 		.....
 
+ * /etc/shadow
+
 	$ cat /etc/shadow
 		.....
 		kang:$6$vHjL0....E0:16880:0:99999:7:::
 		.....
+
+ * /etc/login.defs
 
 	$ cat /etc/login.defs
 		.....
@@ -272,6 +280,8 @@ This is a description of subcomment.
 
 		.....
 
+ * /etc/default/useradd
+
 	$ cat /etc/default/useradd
 		.....
 		# Default values for useradd(8)
@@ -312,6 +322,8 @@ This is a description of subcomment.
 		# CREATE_MAIL_SPOOL=yes
 		.....
 
+ * /root/.profile
+
 	$ cat /root/.profile
 
 		# ~/.profile: executed by Bourne-compatible login shells.
@@ -338,6 +350,8 @@ This is a description of subcomment.
 		fi
 
 		mesg n
+
+ * /root/.bashrc
 
 	$ cat /root/.bashrc
 
@@ -446,6 +460,8 @@ This is a description of subcomment.
 		export PATH=$PATH:/etc/alternatives/gem-bin
 
 	$
+
+-----------------------------------------
 
 You have a choice of the below.
 
