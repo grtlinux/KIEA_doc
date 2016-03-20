@@ -1,0 +1,97 @@
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+[ 그룹 생성 ]
+
+1. 그룹 생성
+
+	groupadd [option] [value] [groupName]
+
+		$ groupadd -f groupName
+		$ groupadd -g 123 groupName
+		$ groupadd -r 222 groupName
+
+2. 그룹 수정
+
+	groupmod [option] [value] [groupName]
+
+		$ groupmod -g 123 groupName
+		$ groupmod -n groupName2
+
+3. 그룹 삭제
+
+	groupdel [groupName]
+
+		$ groupdel groupName
+
+
+----------------------------------------------------------------------------------------------------
+[ 계정 생성 ]
+
+1. 계정이 있는지 확인
+
+	$ cat /etc/passwd | grep userName
+
+2. 그룹 + 계정 + 홈 생성
+
+	$ useradd userName -u 100
+	$ useradd userName -G users
+	$ cat /etc/passwd | grep userName
+	userName:x:100:500::/home/userName:/bin/bash
+
+3. 패스워드 지정하기
+
+	$ echo 'P@ssw0rd' | passwd --stdin userName
+	Changing password for user userName
+	passwd: all authenitcation tokens updated successfully.
+
+4. 홈 데렉토리 없는 계정 만들기
+
+	$ useradd -M userName
+	$ cd /home/userName
+	-bash: cd: /home/userName: No such file or directory
+	
+----------------------------------------------------------------------------------------------------
+[ 쉘 권한 없는 계정 생성 ] -> 해당 계정은 로그인 할 수 없는 계정이다.
+
+1. 확인
+
+	$ grep nologin /etc/passwd
+	bin:x:1:1:bin:/bin:/sbin/nologin
+	...
+	apache:x:48:48:Apache:/var/www:/sbin/nologin
+	...
+	sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+
+2. 사용자 생성-1
+
+	$ useradd -s /sbin/nologin userName
+	$ grep userName /etc/passwd
+	userName:x:501:501::/home/userName:/sbin/nologin
+	$ su - userName
+	This account is currently no available.      <- 메시지 출력
+
+3. 사용자 생성-2
+
+	$ useradd -s /bin/false userName
+	$ grep userName /etc/passwd
+	userName:x:502:502::/home/userName:/bin/false
+	$ su - userName
+	$                                    <- 메시지 출력하지 않는다.
+
+
+----------------------------------------------------------------------------------------------------
+[ profile ]
+
+1. .bash_profile
+
+2. .profile
+
+3. .bashrc
+
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
