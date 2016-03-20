@@ -1,3 +1,60 @@
+------------------------------------------------------------------------------------------------------------------
+
+root@bt5r2:/etc# cat hosts
+       127.0.0.1	localhost
+       127.0.1.1	bt.foo.org	bt
+       
+       192.168.0.21	bt5r2.tain.com	bt5r2	loghost                        <-----
+       
+       # The following lines are desirable for IPv6 capable hosts
+       ::1     localhost ip6-localhost ip6-loopback
+       fe00::0 ip6-localnet
+       ff00::0 ip6-mcastprefix
+       ff02::1 ip6-allnodes
+       ff02::2 ip6-allrouters
+       ff02::3 ip6-allhosts
+
+root@bt5r2:/etc# cat nodename
+       bt5r2                                                                   <-----
+
+root@bt5r2:/etc# cat hostname
+       bt5r2                                                                   <-----
+
+root@bt5r2:/etc# cat resolv.conf
+       nameserver 168.126.63.1
+       nameserver 168.126.63.2
+
+root@bt5r2:/etc# cat network/interfaces
+       auto lo
+       iface lo inet loopback
+       
+       auto eth0
+       #iface eth0 inet dhcp
+       iface eth0 inet static
+       address 192.168.0.21                                                     <-----
+       netmask 255.255.255.0
+       network 192.168.0.0
+       broadcast 192.168.0.255
+       gateway 192.168.0.1
+       
+       dns-nameservers 168.126.63.1 168.126.63.2
+       
+       auto eth1
+       iface eth1 inet dhcp
+       
+       auto eth2
+       iface eth2 inet dhcp
+       
+       auto ath0
+       iface ath0 inet dhcp
+       
+       auto wlan0
+       iface wlan0 inet dhcp
+
+root@bt5r2:/etc# 
+
+------------------------------------------------------------------------------------------------------------------
+
 1. 네트워크 설정 
 [설명] 로컬에서 사용하는 DNS라고 생각하면 됩니다. IP주소를 hostname으로 매핑 시켜주는 역활을 합니다. 
 # cat /etc/hosts
