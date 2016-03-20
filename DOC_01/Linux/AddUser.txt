@@ -37,19 +37,23 @@
 	$ useradd userName -u 100
 	$ useradd userName -G users
 	$ cat /etc/passwd | grep userName
-	userName:x:100:500::/home/userName:/bin/bash
+		userName:x:100:1001:User userName:/home/userName:/bin/bash
+	$ mkdir /home/userName
+	$ chown userName:users /home/userName
+	$ su - userName
+	userName:~$
 
 3. 패스워드 지정하기
 
 	$ echo 'P@ssw0rd' | passwd --stdin userName
-	Changing password for user userName
-	passwd: all authenitcation tokens updated successfully.
+		Changing password for user userName
+		passwd: all authenitcation tokens updated successfully.
 
 4. 홈 데렉토리 없는 계정 만들기
 
 	$ useradd -M userName
 	$ cd /home/userName
-	-bash: cd: /home/userName: No such file or directory
+		-bash: cd: /home/userName: No such file or directory
 	
 ----------------------------------------------------------------------------------------------------
 [ 쉘 권한 없는 계정 생성 ] -> 해당 계정은 로그인 할 수 없는 계정이다.
