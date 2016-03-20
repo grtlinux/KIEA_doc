@@ -23,7 +23,7 @@ This is a description of subcomment.
 		kang:$6$vHjL0....E0:16880:0:99999:7:::
 		.....
 
- * /etc/login.defs
+/etc/login.defs
 
 	$ cat /etc/login.defs
 		.....
@@ -280,7 +280,7 @@ This is a description of subcomment.
 
 		.....
 
- * /etc/default/useradd
+/etc/default/useradd
 
 	$ cat /etc/default/useradd
 		.....
@@ -322,7 +322,7 @@ This is a description of subcomment.
 		# CREATE_MAIL_SPOOL=yes
 		.....
 
- * /root/.profile
+/root/.profile
 
 	$ cat /root/.profile
 
@@ -351,7 +351,7 @@ This is a description of subcomment.
 
 		mesg n
 
- * /root/.bashrc
+/root/.bashrc
 
 	$ cat /root/.bashrc
 
