@@ -13,8 +13,13 @@ This is a description of subcomment.
 	$ cat /etc/default/useradd
 
 You have a choice of the below.
+
  * 1. Hello
  * 2. World.
 
 -----------------------------------------
-The end
+
+1. [naver-http://www.naver.com](http://www.naver.com)
+
+-----------------------------------------
+END.
