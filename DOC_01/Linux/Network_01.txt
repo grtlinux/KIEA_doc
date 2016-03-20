@@ -20,6 +20,9 @@ root@bt5r2:/etc# cat nodename
 root@bt5r2:/etc# cat hostname
        bt5r2                                                                   <-----
 
+root@bt5r2:/etc# hostname
+       bt5r2                                                                   <-----
+
 root@bt5r2:/etc# cat resolv.conf
        nameserver 168.126.63.1
        nameserver 168.126.63.2
