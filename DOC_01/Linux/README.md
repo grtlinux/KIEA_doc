@@ -2,21 +2,21 @@
 -----------------------------------------
 This is a description of subcomment.
 
- * /etc/group
+/etc/group
 
 	$ cat /etc/group
 		.....
 		users:x:100:kang
 		.....
 
- * /etc/passwd
+/etc/passwd
 
 	$ cat /etc/passwd
 		.....
 		kang:x:1001:100:Desc Kiea Kang:/home/kang:/bin/bash
 		.....
 
- * /etc/shadow
+/etc/shadow
 
 	$ cat /etc/shadow
 		.....
