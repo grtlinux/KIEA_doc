@@ -12,6 +12,18 @@ ubuntu root passwd
 	#
 	
 -----------------------------------------
+ubuntu 한글 display
+
+	$ export LANG=ko_KR.EUC-KR
+	# export LANG=ko_KR.EUC-KR
+	
+	$ cat .bash_profile
+		# .bash_profile
+		if [ -f "$HOME/.profile" ]; then
+			. "$HOME/.profile"
+		fi
+	
+-----------------------------------------
 
 /etc/network/interfaces
 
