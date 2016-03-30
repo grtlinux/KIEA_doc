@@ -1,5 +1,17 @@
 #Linux
 -----------------------------------------
+ubuntu root passwd
+
+	$ sudo passwd root
+		[sudo] password for kang:
+		Enter new UNIX password:
+		Retype new UNIX password:
+		passwd: password updated successfully
+	$ su -
+		Password:
+	#
+	
+-----------------------------------------
 
 /etc/network/interfaces
 
