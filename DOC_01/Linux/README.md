@@ -22,6 +22,9 @@ ubuntu 한글 display
 		if [ -f "$HOME/.profile" ]; then
 			. "$HOME/.profile"
 		fi
+		
+		export LANG=ko_KR.EUC-KR
+	
 	
 -----------------------------------------
 
