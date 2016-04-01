@@ -16,8 +16,12 @@ ubuntu root permission
 
 	# vi /etc/ssh/sshd_config
 		.....
-		PermitRootLogin yes
+		PermitRootLogin no         <- 수정함
 		.....
+	
+	# service sshd restart
+		Stopping sshd:            [  OK  ]
+		Starting sshd:            [  OK  ]
 	
 -----------------------------------------
 ubuntu 한글 display
