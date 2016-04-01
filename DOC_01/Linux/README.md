@@ -13,7 +13,10 @@ Linux Samba Server Setting
 	[http://blog.naver.com/zobbily/100056459407]
 	[http://blog.naver.com/raining178/100122061515]
 	[http://syung1104.blog.me/220132369942]
-
+	[http://cafe.naver.com/openrt/5476]            <- sshfs
+	
+	
+	
 -----------------------------------------
 ubuntu root passwd
 
