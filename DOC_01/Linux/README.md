@@ -2,6 +2,7 @@
 -----------------------------------------
 Linux DNS Server Setting
 
+	[http://happy_jhyo.blog.me/70171647409]
 	[http://blog.naver.com/kimjs6873/220655902780]
 	[http://stop2y.blog.me/220100629808]
 	[http://yyman.tistory.com/808]
