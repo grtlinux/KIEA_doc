@@ -13,7 +13,8 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 -----------------------------------------------------------------------------------------------------
 1. 현재 시스템의 디스크 파티션 정보 확인
 
-	root@FileUbuntu2:~# sudo fdisk -l
+		root@FileUbuntu2:~# sudo fdisk -l
+		
 		Disk /dev/sda: 214.7 GB, 214748364800 bytes
 		255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
 		Units = sectors of 1 * 512 = 512 bytes
@@ -34,7 +35,8 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		Disk identifier: 0x00000000
 	
 		Disk /dev/sdb doesn't contain a valid partition table
-	root@FileUbuntu2:~# 
+	
+		root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
 2. 디스크 파티션 생성
