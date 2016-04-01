@@ -1,32 +1,41 @@
+Linux DNS Server Setting
+
+	[http://happy_jhyo.blog.me/70171647409]
+	[http://blog.naver.com/kimjs6873/220655902780]
+	[http://stop2y.blog.me/220100629808]
+	[http://yyman.tistory.com/808]
+	[http://cafe.naver.com/linuxlog/253]
+
+
 $ cat /etc/network/interfaces
-  auto lo
-  iface lo inet loopback
-  
-  auto eth0
-  iface eth0 inet dhcp
-  # iface eth0 inet static
-  # address 192.168.0.18
-  # netmask 255.255.255.0
-  # network 192.168.0.0
-  # broadcast 192.168.0.255
-  # gateway 192.168.0.1
-  dns-nameservers 168.126.63.1 168.126.63.2
-
-  auto eth1
-  iface eth1 inet dhcp
-
-  auto eth2
-  iface eth2 inet dhcp
-
-  auto ath0
-  iface ath0 inet dhcp
-
-  auto wlan0
-  iface wlan0 inet dhcp
+	auto lo
+	iface lo inet loopback
+	
+	auto eth0
+	iface eth0 inet dhcp
+	# iface eth0 inet static
+	# address 192.168.0.18
+	# netmask 255.255.255.0
+	# network 192.168.0.0
+	# broadcast 192.168.0.255
+	# gateway 192.168.0.1
+	dns-nameservers 168.126.63.1 168.126.63.2
+	
+	auto eth1
+	iface eth1 inet dhcp
+	
+	auto eth2
+	iface eth2 inet dhcp
+	
+	auto ath0
+	iface ath0 inet dhcp
+	
+	auto wlan0
+	iface wlan0 inet dhcp
 
 $ cat /etc/resolv.conf
-  nameserver 168.126.63.1
-  nameserver 168.126.63.2
+	nameserver 168.126.63.1
+	nameserver 168.126.63.2
 
 $
 
