@@ -1,8 +1,10 @@
 #Linux
 -----------------------------------------
+Linux DNS Server Setting
 
-1. Linux DNS Server Setting - 1 [http://blog.naver.com/kimjs6873/220655902780]
-2. Linux DNS Server Setting - 2 [http://stop2y.blog.me/220100629808]
+	[http://blog.naver.com/kimjs6873/220655902780]
+	[http://stop2y.blog.me/220100629808]
+	[http://yyman.tistory.com/808]
 
 -----------------------------------------
 ubuntu root passwd
