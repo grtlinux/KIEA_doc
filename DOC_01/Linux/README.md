@@ -11,6 +11,7 @@ Linux DNS Server Setting
 Linux Samba Server Setting
 
 	[http://blog.naver.com/zobbily/100056459407]
+	[http://blog.naver.com/raining178/100122061515]
 
 -----------------------------------------
 ubuntu root passwd
