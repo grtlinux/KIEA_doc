@@ -12,6 +12,14 @@ ubuntu root passwd
 	#
 	
 -----------------------------------------
+ubuntu root permission
+
+	# vi /etc/ssh/sshd_config
+		.....
+		PermitRootLogin yes
+		.....
+	
+-----------------------------------------
 ubuntu 한글 display
 
 	$ export LANG=ko_KR.EUC-KR
