@@ -1,5 +1,12 @@
 #Linux
 -----------------------------------------
+scp remote copy
+
+	$ scp ~/FILES/file kang@192.168.0.24:~/FILES/file2
+	
+	$ scp -rv ~/FILES kang@192.168.0.24:~/FILES
+	
+-----------------------------------------
 Linux DNS Server Setting
 
 	[http://happy_jhyo.blog.me/70171647409]
