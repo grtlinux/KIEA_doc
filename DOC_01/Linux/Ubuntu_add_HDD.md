@@ -14,28 +14,26 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 1. 현재 시스템의 디스크 파티션 정보 확인
 
 	root@FileUbuntu2:~# sudo fdisk -l
-
-	Disk /dev/sda: 214.7 GB, 214748364800 bytes
-	255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
-	Units = sectors of 1 * 512 = 512 bytes
-	Sector size (logical/physical): 512 bytes / 512 bytes
-	I/O size (minimum/optimal): 512 bytes / 512 bytes
-	Disk identifier: 0x0000d1e5
-
-	   Device Boot      Start         End      Blocks   Id  System
-	/dev/sda1   *        2048   418383871   209190912   83  Linux
-	/dev/sda2       418385918   419428351      521217    5  Extended
-	/dev/sda5       418385920   419428351      521216   82  Linux swap / Solaris
-
-	Disk /dev/sdb: 214.7 GB, 214748364800 bytes
-	255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
-	Units = sectors of 1 * 512 = 512 bytes
-	Sector size (logical/physical): 512 bytes / 512 bytes
-	I/O size (minimum/optimal): 512 bytes / 512 bytes
-	Disk identifier: 0x00000000
-
-	Disk /dev/sdb doesn't contain a valid partition table
-
+		Disk /dev/sda: 214.7 GB, 214748364800 bytes
+		255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
+		Units = sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 512 bytes
+		I/O size (minimum/optimal): 512 bytes / 512 bytes
+		Disk identifier: 0x0000d1e5
+	
+		   Device Boot      Start         End      Blocks   Id  System
+		/dev/sda1   *        2048   418383871   209190912   83  Linux
+		/dev/sda2       418385918   419428351      521217    5  Extended
+		/dev/sda5       418385920   419428351      521216   82  Linux swap / Solaris
+	
+		Disk /dev/sdb: 214.7 GB, 214748364800 bytes
+		255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
+		Units = sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 512 bytes
+		I/O size (minimum/optimal): 512 bytes / 512 bytes
+		Disk identifier: 0x00000000
+	
+		Disk /dev/sdb doesn't contain a valid partition table
 	root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
