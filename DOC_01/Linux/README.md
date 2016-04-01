@@ -5,6 +5,7 @@ Linux DNS Server Setting
 	[http://blog.naver.com/kimjs6873/220655902780]
 	[http://stop2y.blog.me/220100629808]
 	[http://yyman.tistory.com/808]
+	[http://cafe.naver.com/linuxlog/253]
 
 -----------------------------------------
 ubuntu root passwd
