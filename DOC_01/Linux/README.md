@@ -8,6 +8,11 @@ Linux DNS Server Setting
 	[http://cafe.naver.com/linuxlog/253]
 
 -----------------------------------------
+Linux Samba Server Setting
+
+	[http://blog.naver.com/zobbily/100056459407]
+
+-----------------------------------------
 ubuntu root passwd
 
 	$ sudo passwd root
