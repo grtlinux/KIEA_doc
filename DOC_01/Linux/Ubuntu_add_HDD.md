@@ -34,7 +34,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		I/O size (minimum/optimal): 512 bytes / 512 bytes
 		Disk identifier: 0x00000000
 	
-		Disk /dev/sdb doesn't contain a valid partition table
+		Disk /dev/sdb doesn't contain a valid partition table                  <--
 	
 		root@FileUbuntu2:~# 
 
@@ -50,7 +50,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 
 		Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
 
-		Command (m for help): m
+		Command (m for help): m                                      <--
 		Command action
 		   a   toggle a bootable flag
 		   b   edit bsd disklabel
@@ -69,11 +69,11 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		   w   write table to disk and exit
 		   x   extra functionality (experts only)
 
-		Command (m for help): n
+		Command (m for help): n                                     <--
 		Partition type:
 		   p   primary (0 primary, 0 extended, 4 free)
 		   e   extended
-		Select (default p): p
+		Select (default p): p                                     <--
 		Partition number (1-4, default 1): 
 		Using default value 1
 		First sector (2048-419430399, default 2048): 
@@ -81,7 +81,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		Last sector, +sectors or +size{K,M,G} (2048-419430399, default 419430399): 
 		Using default value 419430399
 
-		Command (m for help): w
+		Command (m for help): w                                     <--
 		The partition table has been altered!
 
 		Calling ioctl() to re-read partition table.
@@ -115,7 +115,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		Disk identifier: 0x68d8f85e
 
 		   Device Boot      Start         End      Blocks   Id  System
-		/dev/sdb1            2048   419430399   209714176   83  Linux
+		/dev/sdb1            2048   419430399   209714176   83  Linux                       <--
 		
 		root@FileUbuntu2:~# 
 
@@ -175,7 +175,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		Disk identifier: 0x68d8f85e
 
 		   Device Boot      Start         End      Blocks   Id  System
-		/dev/sdb1            2048   419430399   209714176   83  Linux
+		/dev/sdb1            2048   419430399   209714176   83  Linux                        <--
 		
 		root@FileUbuntu2:~# 
 
@@ -203,7 +203,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		UUID=83532cd8-5fbc-4a30-8119-1f1d7a46d396 none            swap    sw              0       0
 
 		# Extend data disk
-		/dev/sdb1      /data1  ext4    defaults        0       1
+		/dev/sdb1      /data1  ext4    defaults        0       1                                          <--
 
 -----------------------------------------------------------------------------------------------------
 8. fstab에 설정된 모든 파일시스템을 마운트하고 디스트 정보를 확인한다.
@@ -219,7 +219,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		none           tmpfs     5.0M     0  5.0M   0% /run/lock
 		none           tmpfs     248M     0  248M   0% /run/shm
 		none           tmpfs     100M     0  100M   0% /run/user
-		/dev/sdb1      ext4      197G   60M  187G   1% /data1
+		/dev/sdb1      ext4      197G   60M  187G   1% /data1                   <--
 	
 		root@FileUbuntu2:~# 
 
@@ -242,7 +242,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		UUID=83532cd8-5fbc-4a30-8119-1f1d7a46d396 none            swap    sw              0       0
 
 		# Extend data disk
-		# /dev/sdb1      /data1  ext4    defaults        0       1
+		# /dev/sdb1      /data1  ext4    defaults        0       1                                        <--
 
 -----------------------------------------------------------------------------------------------------
 10. 언마운트 상태를 확인한다.
