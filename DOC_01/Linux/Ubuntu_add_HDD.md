@@ -41,7 +41,8 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 -----------------------------------------------------------------------------------------------------
 2. 디스크 파티션 생성
 
-	root@FileUbuntu2:~# sudo fdisk /dev/sdb
+		root@FileUbuntu2:~# sudo fdisk /dev/sdb
+	
 		Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
 		Building a new DOS disklabel with disk identifier 0x68d8f85e.
 		Changes will remain in memory only, until you decide to write them.
@@ -85,13 +86,14 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 
 		Calling ioctl() to re-read partition table.
 		Syncing disks.
-	root@FileUbuntu2:~# 
+		
+		root@FileUbuntu2:~# 
 
 
 -----------------------------------------------------------------------------------------------------
 3. 파티션 생성 확인
 
-	root@FileUbuntu2:~# fdisk -l
+		root@FileUbuntu2:~# fdisk -l
 
 		Disk /dev/sda: 214.7 GB, 214748364800 bytes
 		255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
@@ -114,13 +116,15 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 
 		   Device Boot      Start         End      Blocks   Id  System
 		/dev/sdb1            2048   419430399   209714176   83  Linux
-	root@FileUbuntu2:~# 
+		
+		root@FileUbuntu2:~# 
 
 
 -----------------------------------------------------------------------------------------------------
 4. 파티션 포멧
 
-	root@FileUbuntu2:~# sudo mkfs.ext4 /dev/sdb1
+		root@FileUbuntu2:~# sudo mkfs.ext4 /dev/sdb1
+		
 		mke2fs 1.42.8 (20-Jun-2013)
 		Filesystem label=
 		OS type: Linux
@@ -143,13 +147,13 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		Creating journal (32768 blocks): done
 		Writing superblocks and filesystem accounting information: done     
 
-	root@FileUbuntu2:~# 
+		root@FileUbuntu2:~# 
 
 
 -----------------------------------------------------------------------------------------------------
 5. 디스크 파티션 정보 확인
 
-	root@FileUbuntu2:~# sudo fdisk -l
+		root@FileUbuntu2:~# sudo fdisk -l
 
 		Disk /dev/sda: 214.7 GB, 214748364800 bytes
 		255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
@@ -172,18 +176,19 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 
 		   Device Boot      Start         End      Blocks   Id  System
 		/dev/sdb1            2048   419430399   209714176   83  Linux
-	root@FileUbuntu2:~# 
+		
+		root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
 6. 파티션에 마운트 할 폴더 생성
 
-	root@FileUbuntu2:~# sudo mkdir /data1
-	root@FileUbuntu2:~# 
+		root@FileUbuntu2:~# sudo mkdir /data1
+		root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
 7. 파티션 자동 마운트를 위한 파일 수정
 
-	root@FileUbuntu2:~# sudo vi /etc/fstab
+		root@FileUbuntu2:~# sudo vi /etc/fstab
 
 		# /etc/fstab: static file system information.
 		#
@@ -203,8 +208,8 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 -----------------------------------------------------------------------------------------------------
 8. fstab에 설정된 모든 파일시스템을 마운트하고 디스트 정보를 확인한다.
 
-	root@FileUbuntu2:~# sudo mount -a
-	root@FileUbuntu2:~# df -hT
+		root@FileUbuntu2:~# sudo mount -a
+		root@FileUbuntu2:~# df -hT
 	
 		Filesystem     Type      Size  Used Avail Use% Mounted on
 		/dev/sda1      ext4      197G   13G  174G   7% /
@@ -216,13 +221,13 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		none           tmpfs     100M     0  100M   0% /run/user
 		/dev/sdb1      ext4      197G   60M  187G   1% /data1
 	
-	root@FileUbuntu2:~# 
+		root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
 9. 언마운트하고 fstab 파일을 원래데로 수정한다.
 
-	root@FileUbuntu2:~# umount /dev/sdb1
-	root@FileUbuntu2:~# sudo vi /etc/fstab
+		root@FileUbuntu2:~# umount /dev/sdb1
+		root@FileUbuntu2:~# sudo vi /etc/fstab
 
 		# /etc/fstab: static file system information.
 		#
@@ -242,7 +247,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 -----------------------------------------------------------------------------------------------------
 10. 언마운트 상태를 확인한다.
 
-	root@FileUbuntu2:~# df -hT
+		root@FileUbuntu2:~# df -hT
 
 		Filesystem     Type      Size  Used Avail Use% Mounted on
 		/dev/sda1      ext4      197G   13G  174G   7% /
@@ -253,7 +258,7 @@ VirtualBox 관리자 > 파일 > 가상 미디어 관리자 > 하드 드라이브
 		none           tmpfs     248M     0  248M   0% /run/shm
 		none           tmpfs     100M     0  100M   0% /run/user
 	
-	root@FileUbuntu2:~# 
+		root@FileUbuntu2:~# 
 
 -----------------------------------------------------------------------------------------------------
 11. 가상HOST를 시스템을 종료하고 Virual HDD를 제거한다. 당근 [가상미디어 관리자]에서도 제거한다.
