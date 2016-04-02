@@ -4,13 +4,13 @@ scp remote copy
 
 	$ scp [-rv] [원본] [복사할 위치]
 
-	$ scp ~/FILES/file kang@192.168.0.24:~/FILES/file2
+	$ scp     ~/FILES/file   kang@192.168.0.24:~/FILES/file2
 	
-	$ scp -rv ~/FILES kang@192.168.0.24:~/FILES
+	$ scp -rv ~/FILES        kang@192.168.0.24:~/FILES
 	
-	$ scp kang@192.168.0.24:~/FILES/file2 ~/FILES/file
+	$ scp     kang@192.168.0.24:~/FILES/file2   ~/FILES/file
 	
-	$ scp -rv kang@192.168.0.24:~/FILES ~/FILES
+	$ scp -rv kang@192.168.0.24:~/FILES         ~/FILES
 	
 -----------------------------------------
 Linux DNS Server Setting
