@@ -5,6 +5,8 @@ alias, unalias, history, !! !번호 !문자열
 	$ alias rm='rm -i'
 	$ unalias
 	$ history
+	$ alias hist='history'
+	$ hist
 	$ !!
 	$ !100
 	$ !cp
