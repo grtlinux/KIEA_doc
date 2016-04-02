@@ -1,5 +1,15 @@
 #Linux
 -----------------------------------------
+alias, unalias, history, !! !번호 !문자열
+
+	$ alias rm='rm -i'
+	$ unalias
+	$ history
+	$ !!
+	$ !100
+	$ !cp
+
+-----------------------------------------
 scp remote copy
 
 	$ scp [-rv] [원본] [복사할 위치]
