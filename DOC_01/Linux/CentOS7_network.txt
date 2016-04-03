@@ -1,0 +1,161 @@
+-------------------------------------------------------------------------
+
+http://zetawiki.com/wiki/VirtualBox%EC%97%90_CentOS_7_%EC%84%A4%EC%B9%98
+
+http://zetawiki.com/wiki/CentOS_7_enp0s3_%EB%8C%80%EC%8B%A0_eth0_%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
+http://ijj.kr/220598380462   <--- 중요 : CentOS
+
+-------------------------------------------------------------------------
+
+	# vi /etc/sysconfig/network-scripts/ifcfg-eth0
+	
+		UUID=126acebc-9ad2-4f03-b8f1-0dca5ef866bd
+		HWADDR=08:00:27:9F:42:21
+		TYPE=Ethernet
+		
+		DEFROUTE=yes
+		PEERDNS=yes
+		PEERROUTES=yes
+		IPV4_FAILURE_FATAL=no
+		
+		IPV6INIT=yes
+		IPV6_AUTOCONF=yes
+		IPV6_DEFROUTE=yes
+		IPV6_PEERDNS=yes
+		IPV6_PEERROUTES=yes
+		IPV6_FAILURE_FATAL=NO
+		
+		# ONBOOT=no
+		ONBOOT=yes
+		
+		NAME=eth0
+		
+		BOOTPROTO=dhcp
+		# BOOTPROTO=static
+		# IPADDR=192.168.0.100
+		# NETMASK=255.255.255.0
+		# GATEWAY=192.168.0.1
+		# DNS1=168.126.63.1
+		# DNS2=168.126.63.2
+		
+	# systemctl restart NetworkManager
+	# systemctl restart network
+
+	# reboot
+
+----------------------------------------------------------------------------------
+
+일단 vmware에 centos7을 minimal로 깔아줌.
+터미널에 친해져야하니깐.
+
+일단 뭐가 깔렸나 보니까, 미니멀이라고는 해도 서버용 centos이다보니
+sqlite나 mariadb같은건 깔려있구나.
+
+http://www.tecmint.com/things-to-do-after-minimal-rhel-centos-7-installation/
+
+이거 보고 몇개만 해보면
+
+1. ifconfig가 아직 안깔려있다.
+ifconfig를 쓰는 환경이 더 많을테니 일단 net-tools를 깔아야지.
+
+	# yum install net-tools
+
+혼자 가지고 놀거니까 static ip setting은 패스
+
+2. hostname이 localhost.localdomain이다.
+흔해빠진것같으니까 일단 바꿔야지.
+
+	# vi /etc/hostname
+
+3. 탭탭 하다보니까 비프음이 짜증난다. 꺼야지.
+
+스피커 모듈일 지워버린다고 하면 된다. 그러고보니 5년전에 시프들을때
+모듈 뻑나서 계속 insmod rmmod 했던기억이 난다.
+피씨스피커라서 pcspkr.ko 라는 파일.
+
+	# rmmod pcspkr
+
+이거 다시 살리려면 pcspkr.ko를 insmod 인데 그럴일은 없겠지.
+
+리붓하면 다시 이 모듈을 살리는데,
+부팅할때마다 부르게 하는 두가지 방법이 있다.
+1) modprobe의 blacklist에 등록
+2) .bash_profile에 rmmod를 넣기
+
+1번이 있어보여서 해볼랬는데 deprecated.
+2번은 global로 설정하려고 하니 /etc/profile을 고쳐야하는데
+"이거 고치지 마라"라고 써있다. 규약은 잘 지켜줘야지.
+
+혹시나 해서 /etc/inputrc 를 열어보니 첫줄에 대놓고 써있다.
+
+	set bell-style none
+
+이러면 vi에서는 소리가 나니까 /etc/virc 혹은 vimrc를 열어서
+
+	set visualbell
+
+
+4. 업데이트. 이건 당연히 해줘야지 ㅇㅇ
+
+	# yum update && yum upgrade
+
+5. gcc 설치
+
+이건 당연히 해줘야할것같은 느낌. 근데 전에 rails환경 만들때 g++가 없었다.
+yum install g++ 하면 안먹히니까, 패키지 이름을 찾아줘야함.
+
+	# yum list gcc
+
+하니까 gcc-c++ 이라는게 있다. 그렇다면...
+
+	# yum install -y gcc gcc-c++
+
+6. 그외에 잡다한 설치를 위해서
+
+	# yum install epel-release 
+	# yum install p7zip wget
+
+기타등등 기타등등
+
+
+----------------------------------------------------------------------------
+확인하는 명령어 ifconfig , netstat 또는 route
+
+	# cd /etc/sysconfig
+	# vi network
+	  GATEWAY = "수정 "
+	# cd /etc/sysconfig/network-scripts
+	# vi ifcfg-eth0 (해당 ethernet inferface) 
+	  IPADDRESS = " 수정 "
+	  NETMASK = " 수정 "
+	# /etc/rc.d/init.d/network restart
+
+----------------------------------------------------------------------------
+※ 시스템을 리부팅하기전에 "sync"를 통해서 디스크 동기화를 시켜주는 것이 안전
+----------------------------------------------------------------------------
+이더넷 IP수정 후 랜카드 활성화 시킬때
+
+	# ifup eth0 (해당 ethernet inferface) 
+	# ifdown eth0 (해당 ethernet inferface) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
