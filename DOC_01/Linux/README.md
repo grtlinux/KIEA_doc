@@ -56,7 +56,7 @@ ubuntu root passwd
 	#
 	
 -----------------------------------------
-ubuntu root permission
+ubuntu ssh root login permission
 
 	# vi /etc/ssh/sshd_config
 		.....
