@@ -49,11 +49,17 @@ http://ijj.kr/220598380462   <--- 중요 : CentOS
 	
 		DEVICE=eth0
 		ONBOOT=yes
-		#BOOTPROTO=dhcp
+		
+		# BOOTPROTO=dhcp
+
 		BOOTPROTO=static
 		IPADDR=192.168.0.27
-		NETWORK=255.255.255.0
+		NETMASK=255.255.255.0
+		NETWORK=192.168.0.0
 		GATEWAY=192.168.0.1
+		
+		DNS1=168.126.63.1
+		DNS2=168.126.63.2
 
 ----------------------------------------------------------------------------------
 
