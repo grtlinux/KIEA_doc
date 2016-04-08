@@ -1,8 +1,21 @@
 #Linux
 -----------------------------------------
+OS bit, OS content
+
+	$ getconf LONG_BIT
+		32
+	
+	$ cat /etc/os-release
+		NAME="Ubuntu"
+		VERION="13.10, Saucy Salamander"
+		....
+	
+-----------------------------------------
 alias, unalias, history, !! !번호 !문자열
 
 	$ alias rm='rm -i'
+	$ alias cp='cp -i'
+	$ alias mv='mv -i'
 	$ unalias
 	$ history
 	$ alias hist='history'
