@@ -1,0 +1,39 @@
+1. eclipse.ini 파일 수정 (STS인 경우 STS.ini)
+
+-vmarg 하단에 이하 옵션들 추가
+
+-Dosgi.requiredJavaVersion=1.5    <- 사용하고자하는 JAVA 버전으로 수정 1.7 등
+-Xverify:none                     <- 이클립스 시작시 class 유효성 검사 생략으로 초기 구동 속도 향상
+-XX:+UseParallelGC                <- 병렬 가비지 콜렉션 처리로 이클립스 속도 향상
+-XX:-UseConcMarkSweepGC           <- 이클립스의 GUI 응답속도 향상
+-XX:PermSize=128M                 <- class 로딩 기본 메모리 설정
+-XX:MaxPermSize=128M              <- class 로딩 최대 메모리 설정
+-XX:NewSize=128M                  <- JVM에서 새로운 객체 생성시 로딩되는 최소 메모리 설절
+-XX:MaxNewSize=128M               <- JVM에서 새로운 객체 생성시 로딩되는 최대 메모리 설정
+-Xms2048m                         <- Heap 최소 메모리 설정
+-Xmx2048m                         <- Heap 최대 메모리 설정
+
+* 모든 메모리 설정에서 최소/최대 사이즈를 동일하게 설정함은 이클립스의 유동적인 메모리 관리를 막아 속도를 향상 시키기 위함
+* 컴퓨터 기본 성능이 좋다면 다른 옵션은 제외하고 -Xms와  -Xmx만 설정해도 무방
+* 위 모든 메모리 설정은 8GB 램을 사용하는 컴퓨터에 맞춘 수치
+    ~ 1 GB   : -Xms256m  -Xmx256m 
+    2 ~ 3 GB : -Xms512m  -Xmx512m
+    4 GB ~   : -Xms1024m -Xmx1024m
+
+
+2. 코드 어시스트 비활성화
+
+    Eclipse > Window > Preferences > Java > Editor > Content Assist에서 Enable auto activation 비활성화
+
+3. 스펠링 검사 비활성화
+
+    Eclipse > Window > Preferences > General > Editors > Text Editors > Spelling에서 Enable spell checking  비활성화
+
+
+
+
+
+
+
+
+
