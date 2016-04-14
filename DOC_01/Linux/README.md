@@ -5,6 +5,9 @@ OS bit, OS content
 	$ getconf LONG_BIT
 		32
 	
+	$ cat /etc/*-release
+		.....
+	
 	$ cat /etc/os-release
 		NAME="Ubuntu"
 		VERION="13.10, Saucy Salamander"
