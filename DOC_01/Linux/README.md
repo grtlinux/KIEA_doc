@@ -4,15 +4,25 @@
 ksh 실행 디버깅 코맨트와 옵션
 
 ksh -x script : (에코우기능) 실행되기전에 변수 대체가 된 상태로 스크립트의 각 줄을 출력시켜준다.
+
 ksh -v script : (verbose옵션) 실행되기전에 스크립트에 입력된 상태로 각 줄을 출력시켜준다.
+
 ksh -n script : (noexec옵션) 스크립트의 각줄을 해석은 해주지만 실행은 시키지 않는다.
+
 set -x        : (echo on) 스크립트 실행 추적한다.
+
 set -o xtrace : (echo on)
+
 set +x        : (echo off) 스크립트 실행 추적을 해제한다.
+
 typeset -ft   : (추적옵션 on) 함수에서의 실행 추적을 한다.
+
 PS4           : export PS4=$LINENO  PS4프롬프트의 디폴트 값은 +기호이다. 프롬프트를 리셋시킬 수 있다. 여기서는 줄 번호가 각 줄에 대해서 출력된다.
+
 trap DEBUG    : trap 'print $LINENO' DEBUG   스크립트 각줄에 대한 $LINENO 값을 출력시킨다. 각 스크립트 코맨트마다 트랙 동작이 수행된다.
+
 trap ERR      : trap 'print Bad Input' ERR   0이 아닌 exit status 값이 되돌려지면 trap이 실행된다.
+
 trap EXIT     : trap 'print Exiting from $0' EXIT   스크립트나 함수가 종료하면 메시지가 출력된다.
 
 
