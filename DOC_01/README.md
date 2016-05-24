@@ -2,18 +2,17 @@
 -----------------------------------------
 Oracle VM VirtualBox 관리자
 
-	VB_BT5R2_32         : 192.168.0.21
-	VB_BT5R3            : 192.168.0.22
-	VB_ubuntu13         : 192.168.0.23
-	VB_ubuntu13_File    : 192.168.0.24
-	VB_ubuntu13_DNS     : 192.168.0.25
-	VB_ubuntu13_File2   : 192.168.0.26
-	VB_CentOS7_Svr1     : 192.168.0.27
-	
-	VB_ubuntu13_File3   : 192.168.0.30
-	VB_Fedora_Svr1      : 192.168.0.
-	VB_Debian8_Svr      : 192.168.0.
-	VB_ubuntu15_Svr1    : 192.168.0.
+	VB_BT5R2_32             : 192.168.0.21
+	VB_BT5R3                : 192.168.0.22
+	VB_ubuntu13             : 192.168.0.23
+	VB_ubuntu13_File        : 192.168.0.24
+	VB_ubuntu13_DNS         : 192.168.0.25
+	VB_ubuntu13_File2       : 192.168.0.26
+	VB_CentOS7              : 192.168.0.27
+	VB_Fedora               : 192.168.0.28
+	VB_Debian8              : 192.168.0.29
+	VB_ubuntu15             : 192.168.0.30
+	VB_ubuntu13_File3_web   : 192.168.0.40
 	
 -----------------------------------------
 -----------------------------------------
